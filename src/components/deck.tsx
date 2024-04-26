@@ -35,10 +35,7 @@ export const Deck = ({ children }: PropsWithChildren) => {
   }, [slide, slides, setSlide])
 
   const onFocus = useCallback(() => {
-    console.log(focusRef)
-    console.log(document.activeElement)
     focusRef.current?.focus()
-    console.log(document.activeElement)
   }, [])
 
   const onKeyDown = useCallback((event: KeyboardEvent) => {
@@ -51,17 +48,6 @@ export const Deck = ({ children }: PropsWithChildren) => {
       prevSlide()
     }
   }, [nextSlide, prevSlide])
-
-  useEffect(() => {
-    if (!deckRef.current) {
-      return
-    }
-
-    const deck = deckRef.current
-
-    deck.addEventListener("click", onFocus, false)
-    return () => deck.removeEventListener("click", onFocus, false)
-  }, [onFocus])
 
   // Set up the initially available slides
   useEffect(() => {
@@ -84,8 +70,9 @@ export const Deck = ({ children }: PropsWithChildren) => {
 
   return (
     <PreezContext.Provider value={context}>
-      <input className="absolute top-[-9999px] left-[-9999px]" type="text" ref={focusRef} value="" onChange={() => {}} />
-      <div ref={deckRef}>
+      <div className="w-dvw h-dvh bg-black flex justify-center items-center relative" ref={deckRef} onClick={onFocus}>
+        <input className="absolute top-[-9999px] left-[-9999px]" type="text" ref={focusRef} value="" onChange={() => {
+        }} />
         {children}
       </div>
     </PreezContext.Provider>
