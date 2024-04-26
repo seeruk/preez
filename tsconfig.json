@@ -6,10 +6,10 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "typeRoots": ["./dist/index.d.ts", "node_modules/@types"],
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@/*": [
-        "./src/*"
+        "src/*"
       ]
     },
 
@@ -27,6 +27,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["example", "src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
